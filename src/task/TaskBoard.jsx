@@ -66,6 +66,14 @@ const TaskBoard = () => {
 		);
 	};
 
+	const handleSearch = (searchTerm) => {
+		setTasks(
+			tasks.filter((task) =>
+				task.title.toLowerCase().includes(searchTerm.toLowerCase())
+			)
+		);
+	};
+
 	return (
 		<section className="mb-20" id="tasks">
 			{showAllModal && (
@@ -76,7 +84,7 @@ const TaskBoard = () => {
 				/>
 			)}
 			<div className="container">
-				<SearchTask />
+				<SearchTask onSearch={handleSearch} />
 				<div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 					<TaskAction
 						onAddClick={() => setShoeAllModal(!showAllModal)}
