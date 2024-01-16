@@ -16,26 +16,50 @@ const TaskBoard = () => {
 	};
 
 	const [tasks, setTasks] = useState([defaultTask]);
-	const [showAllModal, setShoeAllModal] = useState(true);
+	const [showAllModal, setShoeAllModal] = useState(false);
+	const [taskToUpdate, setTaskToUpdate] = useState(null);
 
-	const handleAddTask = (newTask) => {
-		setTasks([...tasks, newTask]);
+	const handleAddEditTask = (newTask, isAdd) => {
+		if (isAdd) {
+			setTasks([...tasks, newTask]);
+		} else {
+			setTasks(
+				tasks.map((task) => {
+					if (task.id === newTask.id) {
+						return newTask;
+					}
+					return task;
+				})
+			);
+		}
+
 		setShoeAllModal(false);
+	};
+
+	const handleEditTask = (task) => {
+		setShoeAllModal(true);
+		setTaskToUpdate(task);
+	};
+
+	const handleCloseClick = () => {
+		setShoeAllModal(false);
+		setTaskToUpdate(null);
 	};
 
 	return (
 		<section className="mb-20" id="tasks">
 			{showAllModal && (
 				<AddTaskModal
-					onSave={handleAddTask}
-					onClose={() => setShoeAllModal(false)}
+					onSave={handleAddEditTask}
+					onClose={handleCloseClick}
+					taskToUpdate={taskToUpdate}
 				/>
 			)}
 			<div className="container">
 				<SearchTask />
 				<div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 					<TaskAction onAddClick={() => setShoeAllModal(!showAllModal)} />
-					<TaskList tasks={tasks} />
+					<TaskList tasks={tasks} onEdit={handleEditTask} />
 				</div>
 			</div>
 		</section>
