@@ -99,22 +99,20 @@ const AddTaskModal = ({ onSave, onClose, taskToUpdate }) => {
 						</div>
 					</div>
 				</div>
-				<div className="mt-16 flex justify-center lg:mt-20">
-					<button
-						onClick={handleTaskAdd}
-						type="submit"
-						className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
-					>
-						Save
-					</button>
-				</div>
-				<div className="mt-5 flex justify-center lg:mt-5">
+				<div className="mt-16 flex justify-center lg:mt-20 space-x-2">
 					<button
 						onClick={onClose}
 						type="button"
 						className="rounded bg-red-600 px-4 py-2 text-white transition-all hover:opacity-80"
 					>
 						Close
+					</button>
+					<button
+						onClick={handleTaskAdd}
+						type="submit"
+						className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
+					>
+						Save
 					</button>
 				</div>
 			</form>

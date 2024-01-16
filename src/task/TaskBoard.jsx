@@ -32,8 +32,11 @@ const TaskBoard = () => {
 				})
 			);
 		}
+		handleCloseModal();
+	};
 
-		setShoeAllModal(false);
+	const handleDeleteTask = (taskId) => {
+		setTasks(tasks.filter((task) => task.id !== taskId));
 	};
 
 	const handleEditTask = (task) => {
@@ -41,7 +44,7 @@ const TaskBoard = () => {
 		setTaskToUpdate(task);
 	};
 
-	const handleCloseClick = () => {
+	const handleCloseModal = () => {
 		setShoeAllModal(false);
 		setTaskToUpdate(null);
 	};
@@ -51,7 +54,7 @@ const TaskBoard = () => {
 			{showAllModal && (
 				<AddTaskModal
 					onSave={handleAddEditTask}
-					onClose={handleCloseClick}
+					onClose={handleCloseModal}
 					taskToUpdate={taskToUpdate}
 				/>
 			)}
@@ -59,7 +62,11 @@ const TaskBoard = () => {
 				<SearchTask />
 				<div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 					<TaskAction onAddClick={() => setShoeAllModal(!showAllModal)} />
-					<TaskList tasks={tasks} onEdit={handleEditTask} />
+					<TaskList
+						tasks={tasks}
+						onEdit={handleEditTask}
+						onDelete={handleDeleteTask}
+					/>
 				</div>
 			</div>
 		</section>
