@@ -54,6 +54,18 @@ const TaskBoard = () => {
 		setTaskToUpdate(null);
 	};
 
+	const handleFavorite = (taskId) => {
+		setTasks(
+			tasks.map((task) => {
+				if (task.id === taskId) {
+					return { ...task, isFavorite: !task.isFavorite };
+				} else {
+					return task;
+				}
+			})
+		);
+	};
+
 	return (
 		<section className="mb-20" id="tasks">
 			{showAllModal && (
@@ -74,6 +86,7 @@ const TaskBoard = () => {
 						tasks={tasks}
 						onEdit={handleEditTask}
 						onDelete={handleDeleteTask}
+						onFav={handleFavorite}
 					/>
 				</div>
 			</div>
